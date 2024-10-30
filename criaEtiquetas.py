@@ -25,6 +25,8 @@ def fill_existing_word_table(excel_path, word_path, table_index, sheet_name='Pla
     word_cols = len(table.columns)
     excel_rows = ws.max_row
     excel_cols = ws.max_column
+
+    offset = 10*table_index
     
     # Fill the table
     for row in range(10):
@@ -36,17 +38,13 @@ def fill_existing_word_table(excel_path, word_path, table_index, sheet_name='Pla
 
         row_ = row + 2
 
-        nome_cell_value = ws.cell(row=row_, column=1).value
-        instituicao_cell_value = ws.cell(row=row_, column=2).value
+        nome_cell_value = ws.cell(row = offset + row_, column=1).value
+        instituicao_cell_value = ws.cell(row = offset + row_, column=2).value
         # Convert None to empty string
         nome_cell_value = str(nome_cell_value) if nome_cell_value is not None else ""
         instituicao_cell_value = str(instituicao_cell_value) if instituicao_cell_value is not None else ""
 
-        print(row)
-        print(nome_cell_value)
-        print(instituicao_cell_value)
-        table.cell(row, final_column).text = f"{nome_cell_value}\n{instituicao_cell_value}"
-        print(table.cell(row, final_column).text)
+        table.cell(row - 5*final_column, final_column).text = f"{nome_cell_value}\n{instituicao_cell_value}"
 
     
     # Save the modified document
