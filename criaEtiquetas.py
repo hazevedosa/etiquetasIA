@@ -39,12 +39,14 @@ def fill_existing_word_table(excel_path, word_path, table_index, sheet_name='Pla
         row_ = row + 2
 
         nome_cell_value = ws.cell(row = offset + row_, column=1).value
-        instituicao_cell_value = ws.cell(row = offset + row_, column=2).value
+        posto_cell_value = ws.cell(row = offset + row_, column=3).value
+        instituicao_cell_value = ws.cell(row = offset + row_, column=4).value
         # Convert None to empty string
         nome_cell_value = str(nome_cell_value) if nome_cell_value is not None else ""
         instituicao_cell_value = str(instituicao_cell_value) if instituicao_cell_value is not None else ""
+        posto_cell_value = str(posto_cell_value) if posto_cell_value is not None else ""
 
-        table.cell(row - 5*final_column, final_column).text = f"{nome_cell_value}\n{instituicao_cell_value}"
+        table.cell(row - 5*final_column, final_column).text = f"{posto_cell_value}\n{nome_cell_value}\n{instituicao_cell_value}"
 
     
     # Save the modified document
@@ -57,5 +59,5 @@ if __name__ == "__main__":
     word_file = "etiquetas_teste.docx"
     
     # Fill the first table (index 0) in the Word document
-    for i in range(10):
+    for i in range(23):
         fill_existing_word_table(excel_file, word_file, table_index=i)
